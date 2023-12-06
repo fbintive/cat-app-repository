@@ -10,13 +10,15 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <title>Hello from Electron renderer!</title>
+    <title>(Not just)Daily cat fact app</title>
   </head>
   <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-    <p id="info"></p>
-    <p id="comTest"></p>
+    <h1>Get you random daily cat fact</h1>
+    <!-- <p id="info"></p>
+    <p id="comTest"></p> -->
+    <p id="catFact"></p>
+    <p id="isLoading"></p>
+    <button id="factReload">Get new fact</button>
   </body>
-  <script src="./renderer.js"></script>
+  <script src="../renderer.js"></script>
 </html>
