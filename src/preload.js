@@ -15,13 +15,26 @@ ipcRenderer.on('gotFact', (e, json) => {
   catFact.innerText = json
 });
 
+ipcRenderer.on('clearFacts', () => {
+  const favoriteFacts = document.getElementById('favoriteFacts')
+  favoriteFacts.innerHTML = ''
+});
+
+ipcRenderer.on('populateFacts', (e, factObject) => {
+  const paragraph = document.createElement("p");
+  const node = document.createTextNode(factObject.name);
+  paragraph.setAttribute("id", factObject.id);
+
+  const favoriteFacts = document.getElementById('favoriteFacts')
+  paragraph.appendChild(node);
+  favoriteFacts.appendChild(paragraph);
+});
+
 const API = {
-  // node: () => process.versions.node,
-  // chrome: () => process.versions.chrome,
-  // electron: () => process.versions.electron,
-  // ping: () => ipcRenderer.invoke('ping'),
+  removeFromStoredFacts: (factToRemove) => ipcRenderer.invoke('removeFromStoredFacts', factToRemove),
+  addToStoredFacts: (newFact) => ipcRenderer.invoke('addToStoredFacts', newFact),
+  getStoredFacts: () => ipcRenderer.invoke('getStoredFacts'),
   getFact: async () => await ipcRenderer.invoke('getFact'),
-  // we can also expose variables, not just functions
 }
 
 contextBridge.exposeInMainWorld('api', API)
