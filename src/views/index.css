@@ -1,0 +1,95 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.mainBanner {
+  width: 100%;
+  height: 115px;
+  padding: 30px;
+  background-color: blue;
+  text-align: center;
+}
+
+.mainBanner h1 {
+  font-size: 3rem;
+  color: white;
+}
+
+.dashboard {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+.workingArea {
+  flex: 1;
+  max-width: calc(100% - 420px);
+}
+
+.workingArea-fact {
+  overflow-wrap: break-word;
+}
+
+.favoriteTab {
+  flex: 1;
+  width: 100%;
+  max-width: 400px;
+  max-height: calc(100vh - 155px);
+  border: 2px solid blue;
+  border-radius: 6px;
+}
+
+.favoriteTab-header {
+  width: 100%;
+  background-color: blue;
+  text-align: center;
+  padding: 20px;
+  height: 65px;
+}
+
+.favoriteTab-header h2 {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.favoriteTab-list {
+  padding: 10px;
+  max-height: calc(100% - 65px);
+  overflow-y: auto;
+}
+
+.favoriteFacts {
+  display: flex;
+  flex-direction: column;
+}
+
+.favoriteFacts p {
+  position: relative;
+  transition: all 0.1s;
+  padding: 10px;
+  padding-right: 30px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.favoriteFacts p:after {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  content: "X";
+  color: white;
+  font-weight: 900;
+}
+
+.favoriteFacts p:hover {
+  transition: all 0.3s;
+  cursor: pointer;
+  background-color: #f98282;
+}
