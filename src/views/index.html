@@ -7,17 +7,35 @@
       content="default-src 'self'; script-src 'self'"
     />
     <meta
-      http-equiv="X-Content-Security-Policy"
+      http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
+    <link rel="stylesheet" type="text/css" href="./index.css">
     <title>(Not just)Daily cat fact app</title>
   </head>
   <body>
-    <h1>Get you random daily cat fact</h1>
-    <p id="catFact"></p>
-    <p id="isLoading"></p>
-    <button id="factReload">Get new fact</button>
-    <section id="favoriteFacts"></section>
+    <div class="mainContainer">
+      <div class="mainBanner">
+        <h1 class="dashboard-header">Get you random daily cat fact</h1>
+      </div>
+      <div class="dashboard">
+        <section class="workingArea">
+          <p class="workingArea-fact" id="catFact">Getting a fact, please wait...</p>
+          <div class="workingArea-requests">
+            <button class="workingArea-requests-button" id="factReload">Get new fact</button>
+            <div class="workingArea-requests-loader" id="isLoading"></div>
+          </div>
+        </section>
+        <section class="favoriteTab">
+            <div class="favoriteTab-header">
+              <h2>My favorite facts</h2>
+            </div>
+            <div class="favoriteTab-list">
+              <section class="favoriteFacts" id="favoriteFacts"></section>
+            </div>
+        </section>
+      </div>
+    </div>
   </body>
   <script src="../renderer.js"></script>
 </html>

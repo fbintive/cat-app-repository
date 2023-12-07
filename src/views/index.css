@@ -1,0 +1,183 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.mainBanner {
+  width: 100%;
+  height: 115px;
+  padding: 30px;
+  background-color: blue;
+  text-align: center;
+}
+
+.mainBanner h1 {
+  font-size: 3rem;
+  color: white;
+}
+
+.dashboard {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+.workingArea {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 20px;
+  max-width: calc(100% - 420px);
+}
+
+.workingArea-fact {
+  font-size: 1.25rem;
+  overflow-wrap: break-word;
+  position: relative;
+  transition: all 0.1s;
+  padding: 10px;
+  padding-right: 80px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.workingArea-fact:after {
+  position: absolute;
+  content: "Add";
+  color: white;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.workingArea-fact.isLoading:after {
+  content: "";
+}
+
+.workingArea-fact:hover {
+  cursor: pointer;
+  transition: all 0.1s;
+  background-color: #03b1fc;
+}
+
+.workingArea-requests {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.workingArea-requests-button {
+  outline: none;
+  border: 3px solid blue;
+  border-radius: 4px;
+  background-color: blue;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  height: 50px;
+  width: 200px;
+  transition: all 0.1s;
+}
+
+.workingArea-requests-button:hover {
+  outline: none;
+  background-color: white;
+  color: blue;
+  transition: all 0.1s;
+}
+
+.workingArea-requests-loader {
+  visibility: hidden;
+  width: 30px;
+  height: 30px;
+  border-top: 3px solid blue;
+  border-bottom: 3px solid blue;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-radius: 30px;
+  animation: spin 1s linear infinite;
+}
+
+
+.workingArea-requests-loader.visible {
+  visibility: visible;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.favoriteTab {
+  flex: 1;
+  width: 100%;
+  max-width: 400px;
+  max-height: calc(100vh - 155px);
+  border: 2px solid blue;
+  border-radius: 6px;
+}
+
+.favoriteTab-header {
+  width: 100%;
+  background-color: blue;
+  text-align: center;
+  padding: 20px;
+  height: 65px;
+}
+
+.favoriteTab-header h2 {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.favoriteTab-list {
+  padding: 10px;
+  max-height: calc(100% - 65px);
+  overflow-y: auto;
+}
+
+.favoriteFacts {
+  display: flex;
+  flex-direction: column;
+}
+
+.favoriteFacts i {
+  padding: 10px;
+  text-align: center;
+}
+
+.favoriteFacts p {
+  position: relative;
+  transition: all 0.1s;
+  padding: 10px;
+  padding-right: 30px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.favoriteFacts p:after {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  content: "X";
+  color: white;
+  font-weight: 900;
+}
+
+.favoriteFacts p:hover {
+  transition: all 0.3s;
+  cursor: pointer;
+  background-color: #f98282;
+}
