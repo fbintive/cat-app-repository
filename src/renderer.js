@@ -7,6 +7,10 @@ const fetchInitData = () => {
   getFact();
 };
 
+const runNotifier = async () => {
+  window.api.runNotifier();
+};
+
 const addToStoredFacts = async () => {
   const newFact = document.getElementById('catFact').innerHTML;
   const isValidTarget = newFact !== 'Getting a fact, please wait...';
@@ -32,3 +36,4 @@ document.getElementById('catFact').addEventListener('click', addToStoredFacts);
 document.getElementById('favoriteFacts').addEventListener('click', removeFromStoredFacts);
 
 fetchInitData();
+runNotifier();
