@@ -50,6 +50,7 @@ const API = {
   addToStoredFacts: (newFact) => ipcRenderer.invoke('addToStoredFacts', newFact),
   getStoredFacts: () => ipcRenderer.invoke('getStoredFacts'),
   getFact: () => ipcRenderer.invoke('getFact'),
+  runNotifier: () => ipcRenderer.invoke('runNotifier'),
 };
 
 contextBridge.exposeInMainWorld('api', API);

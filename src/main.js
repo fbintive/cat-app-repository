@@ -1,29 +1,86 @@
 const {
-  app, BrowserWindow, ipcMain,
+  app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, Notification,
 } = require('electron');
 const path = require('node:path');
 const Store = require('electron-store');
 
 let win;
+let tray;
 const store = new Store();
+
 const createWindow = () => {
   win = new BrowserWindow({
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
+    icon: nativeImage.createFromPath('src/assets/cat.png'),
   });
   win.setMenu(null);
   win.maximize();
   win.show();
   win.webContents.openDevTools();
   win.loadFile('src/views/index.html');
+
+  win.on('close', (event) => {
+    if (!app.isQuiting) {
+      event.preventDefault();
+      win.hide();
+    }
+
+    return false;
+  });
 };
 
 app.whenReady().then(() => {
+  const icon = nativeImage.createFromPath('src/assets/cat.png');
+  tray = new Tray(icon);
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Show App',
+      click() {
+        win.show();
+      },
+    },
+    {
+      label: 'Quit',
+      click() {
+        win.destroy();
+        app.quit();
+      },
+    },
+  ]);
+
+  tray.setContextMenu(contextMenu);
+  tray.setToolTip('Cat app');
+  tray.setTitle('Cat app');
+
   createWindow();
 
   let isFetching = false;
+
+  ipcMain.handle('runNotifier', () => {
+    const NOTIFICATION_APP_NAME = 'Cat app';
+    const NOTIFICATION_TITLE = 'New fact!';
+    const NOTIFICATION_BODY = 'New cat fact is waiting for you.';
+
+    const showNotification = () => {
+      if (process.platform === 'win32') {
+        app.setAppUserModelId(NOTIFICATION_APP_NAME);
+      }
+      new Notification({
+        title: NOTIFICATION_TITLE,
+        body: NOTIFICATION_BODY,
+        subtitle: 'Test',
+        icon: 'src/assets/cat.png',
+      }).show();
+    };
+
+    const interval = 1000 * 60 * 5;
+
+    setInterval(() => showNotification(), interval);
+  });
 
   ipcMain.handle('getFact', async () => {
     if (isFetching === false) {
