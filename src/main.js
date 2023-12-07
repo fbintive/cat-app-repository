@@ -47,14 +47,16 @@ app.whenReady().then(() => {
     // store.delete('StoredFacts')
     // console.log(typeof storedFacts)
     if (typeof store.get('StoredFacts') === 'undefined') {
-      store.set('StoredFacts', [{ name: '1', id: '1' }, { name: '2', id: '2' }]);
+      win.webContents.send('addPlaceholderFact');
+      // store.set('StoredFacts', [{ name: '1', id: '1' }, { name: '2', id: '2' }]);
     }
     const storedFacts = store.get('StoredFacts');
-    // console.log(storedFacts)
-    if (storedFacts.legth !== 0) {
+    if (storedFacts.length !== 0) {
       storedFacts.forEach((factObject) => {
         win.webContents.send('populateFacts', factObject);
       });
+    } else {
+      win.webContents.send('addPlaceholderFact');
     }
     // store.set("TestKey", "TestValue")
     // console.log('Main:', store.get('StoredFacts'));
@@ -64,8 +66,11 @@ app.whenReady().then(() => {
   ipcMain.handle('addToStoredFacts', (e, newFact) => {
     const storedFacts = store.get('StoredFacts');
     const newStoredFacts = [...storedFacts];
-    const indexList = newStoredFacts.map((fact) => parseInt(fact.id, 10));
-    const firstAvailableIndex = Math.max(...indexList) + 1;
+    let firstAvailableIndex = 0;
+    if (newStoredFacts.length !== 0) {
+      const indexList = newStoredFacts.map((fact) => parseInt(fact.id, 10));
+      firstAvailableIndex = Math.max(...indexList) + 1;
+    }
     const newFactObject = { name: newFact, id: firstAvailableIndex.toString() };
     newStoredFacts.unshift(newFactObject);
     store.set('StoredFacts', newStoredFacts);
@@ -83,6 +88,9 @@ app.whenReady().then(() => {
     newStoredFacts.forEach((fact) => {
       win.webContents.send('populateFacts', fact);
     });
+    if (newStoredFacts.length === 0) {
+      win.webContents.send('addPlaceholderFact');
+    }
   });
 
   app.on('activate', () => {

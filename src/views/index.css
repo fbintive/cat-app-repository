@@ -28,12 +28,95 @@ body {
 }
 
 .workingArea {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  gap: 20px;
   max-width: calc(100% - 420px);
 }
 
 .workingArea-fact {
+  font-size: 1.25rem;
   overflow-wrap: break-word;
+  position: relative;
+  transition: all 0.1s;
+  padding: 10px;
+  padding-right: 80px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.workingArea-fact:after {
+  position: absolute;
+  content: "Add";
+  color: white;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.workingArea-fact.isLoading:after {
+  content: "";
+}
+
+.workingArea-fact:hover {
+  cursor: pointer;
+  transition: all 0.1s;
+  background-color: #03b1fc;
+}
+
+.workingArea-requests {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.workingArea-requests-button {
+  outline: none;
+  border: 3px solid blue;
+  border-radius: 4px;
+  background-color: blue;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  height: 50px;
+  width: 200px;
+  transition: all 0.1s;
+}
+
+.workingArea-requests-button:hover {
+  outline: none;
+  background-color: white;
+  color: blue;
+  transition: all 0.1s;
+}
+
+.workingArea-requests-loader {
+  visibility: hidden;
+  width: 30px;
+  height: 30px;
+  border-top: 3px solid blue;
+  border-bottom: 3px solid blue;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-radius: 30px;
+  animation: spin 1s linear infinite;
+}
+
+
+.workingArea-requests-loader.visible {
+  visibility: visible;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .favoriteTab {
@@ -67,6 +150,11 @@ body {
 .favoriteFacts {
   display: flex;
   flex-direction: column;
+}
+
+.favoriteFacts i {
+  padding: 10px;
+  text-align: center;
 }
 
 .favoriteFacts p {

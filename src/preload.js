@@ -2,12 +2,17 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 ipcRenderer.on('gettingFactStarted', () => {
   const isLoading = document.getElementById('isLoading');
-  isLoading.innerText = 'True';
+  const catFact = document.getElementById('catFact');
+  catFact.innerText = 'Getting a fact, please wait...';
+  isLoading.classList.add('visible');
+  catFact.classList.add('isLoading');
 });
 
 ipcRenderer.on('gettingFactEnded', () => {
   const isLoading = document.getElementById('isLoading');
-  isLoading.innerText = 'False';
+  const catFact = document.getElementById('catFact');
+  isLoading.classList.remove('visible');
+  catFact.classList.remove('isLoading');
 });
 
 ipcRenderer.on('gotFact', (e, json) => {
@@ -18,6 +23,16 @@ ipcRenderer.on('gotFact', (e, json) => {
 ipcRenderer.on('clearFacts', () => {
   const favoriteFacts = document.getElementById('favoriteFacts');
   favoriteFacts.innerHTML = '';
+});
+
+ipcRenderer.on('addPlaceholderFact', () => {
+  const placeholder = document.createElement('i');
+  const node = document.createTextNode('No facts added yet');
+  placeholder.setAttribute('id', 'placeholder');
+
+  const favoriteFacts = document.getElementById('favoriteFacts');
+  placeholder.appendChild(node);
+  favoriteFacts.appendChild(placeholder);
 });
 
 ipcRenderer.on('populateFacts', (e, factObject) => {

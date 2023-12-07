@@ -20,9 +20,11 @@
       </div>
       <div class="dashboard">
         <section class="workingArea">
-          <p class="workingArea-fact" id="catFact"></p>
-          <p id="isLoading"></p>
-          <button id="factReload">Get new fact</button>
+          <p class="workingArea-fact" id="catFact">Getting a fact, please wait...</p>
+          <div class="workingArea-requests">
+            <button class="workingArea-requests-button" id="factReload">Get new fact</button>
+            <div class="workingArea-requests-loader" id="isLoading"></div>
+          </div>
         </section>
         <section class="favoriteTab">
             <div class="favoriteTab-header">
