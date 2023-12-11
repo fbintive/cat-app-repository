@@ -101,11 +101,8 @@ app.whenReady().then(() => {
   });
 
   ipcMain.handle('getStoredFacts', () => {
-    // store.delete('StoredFacts')
-    // console.log(typeof storedFacts)
     if (typeof store.get('StoredFacts') === 'undefined') {
       win.webContents.send('addPlaceholderFact');
-      // store.set('StoredFacts', [{ name: '1', id: '1' }, { name: '2', id: '2' }]);
     }
     const storedFacts = store.get('StoredFacts');
     if (storedFacts.length !== 0) {
@@ -115,9 +112,6 @@ app.whenReady().then(() => {
     } else {
       win.webContents.send('addPlaceholderFact');
     }
-    // store.set("TestKey", "TestValue")
-    // console.log('Main:', store.get('StoredFacts'));
-    // store.delete('TestKey')
   });
 
   ipcMain.handle('addToStoredFacts', (e, newFact) => {
